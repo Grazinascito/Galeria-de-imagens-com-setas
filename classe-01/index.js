@@ -3,9 +3,8 @@
 //ASIDE MENU   ======*=======*=======
 const selecionaMenu = document.querySelector(".closed-menu");
 const abrirFecharAside = document.querySelector(".menu-aside");
-console.log(selecionaMenu)
-selecionaMenu.addEventListener('click', function(event){
-    console.log('clicou');
+
+selecionaMenu.addEventListener('click', function(){
 
     if(selecionaMenu.src.includes("closed")){
         selecionaMenu.src = "./assets/open-menu.svg";
@@ -19,39 +18,74 @@ selecionaMenu.addEventListener('click', function(event){
 
 //MODAL ======*=======*=======
 
-const clicouNaImg = document.querySelectorAll(".img img");
+const imgDaGaleria = document.querySelectorAll(".img > img");
 const imgDoModal = document.querySelector(".modal__img");
 const btnClose = document.querySelector(".btn-close img");
 const modal = document.querySelector(".modal");
-const heart = document.querySelector(".heart-icon img");
+const heart = document.querySelectorAll(".heart-icon");
 const previusSeta = document.querySelector(".btn-setas__one");
 const nextSeta = document.querySelector(".btn-setas__two");
+const mainSection = document.querySelector(".main-section");
+const modalHeart = document.querySelector(".modal-heart-icon");
+
+const favoritos = document.querySelector(".favoritos");
+const divInteira = document.querySelector(".img")
+
+
+
+
+
+let posicaoAtual = 0;
 
 function abrirModal(indiceDaImg){
+    vericandoCurtidas(indiceDaImg)
     modal.style.display = "flex";
-    imgDoModal.src = clicouNaImg[indiceDaImg].src;
+    imgDoModal.src = imgDaGaleria[indiceDaImg].src;
 
-    console.log(clicouNaImg)
-
-    
+    //setas
     if(posicaoAtual === 0){
         previusSeta.style.display = 'none';
     }else{
         previusSeta.style.display = 'block';
     }
 
-    if(posicaoAtual === clicouNaImg.length -1){
+    if(posicaoAtual === imgDaGaleria.length -1){
         nextSeta.style.display ='none';
     }else{
         
         nextSeta.style.display = 'block';
     }
 
+    
 }
 
-let posicaoAtual = 0;
 
-clicouNaImg.forEach((imagem, indice) => {
+function vericandoCurtidas(indexHeart){
+    if(heart[indexHeart].style.display === 'flex'){
+        modalHeart.style.display = 'flex';
+    }else{
+        
+        modalHeart.style.display = 'none';
+    }
+}
+
+imgDoModal.addEventListener('dblclick', () => {
+
+    imgDaGaleria.forEach((img, index) => {
+        if(img.src === imgDoModal.src){
+            if(heart[index].style.display === 'flex'){
+                heart[index].style.display = 'none'
+            }else{
+                heart[index].style.display = 'flex'
+            }
+
+            vericandoCurtidas(index);
+        }    
+    });
+});
+
+imgDaGaleria.forEach((imagem, indice) => {
+
     imagem.addEventListener('click', event => {
         
         posicaoAtual = indice;
@@ -70,20 +104,18 @@ previusSeta.addEventListener('click', function(){
     if(posicaoAtual > 0){
         posicaoAtual--
     }
+    vericandoCurtidas(posicaoAtual);
+    abrirModal(posicaoAtual);
+    
+});
 
-    abrirModal(posicaoAtual)
-    console.log(posicaoAtual)
-})
 nextSeta.addEventListener('click', function(){
-    if(posicaoAtual < clicouNaImg.length){
+    if(posicaoAtual < imgDaGaleria.length){
         posicaoAtual++
 
     }
-    abrirModal(posicaoAtual)
-})
+    vericandoCurtidas(posicaoAtual);
+    abrirModal(posicaoAtual);
+});
 
 
-// imgDoModal.addEventListener('dblclick', () => {
-//     console.log("kd o coração?")
-//     heart.src = "./assets/like.svg"
-// });

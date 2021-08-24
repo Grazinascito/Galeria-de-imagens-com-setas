@@ -45,17 +45,25 @@
     justify-content: center; 
 }
 
-.img img{
+.img > img{
     width: 280px;
     height: 200px;
+    transition: 1s;
     
 }
+.img > img:hover{
+    width: 260px;
+    height: 180px;
+}
+
 .img{
    
      text-align: center;
      margin: 0px 0px 30px 30px;
+     cursor: pointer;
   
 }
+
 h1{
     text-align: center;
     margin-bottom: 40px;
@@ -103,8 +111,7 @@ h1{
 }
 
 .menu-aside.hidden span{
-   display: none;
-   
+   display: none; 
 }
 
 .modal{
@@ -114,6 +121,7 @@ h1{
     position: fixed;
     display: none;
     flex-direction: column;
+    z-index: 999;
 }
 
 .modal__content{
@@ -137,30 +145,92 @@ h1{
     position: absolute;
     top: 50px;
     right: 16px;
+    cursor: pointer;
 }
 
 .btn-setas__one{
     position: absolute;
-    width: 100px;
-    right: 65%;
+    width: 55px;
+    right: 68%;
     top: 42%;
+    cursor: pointer;
+    
 }
 
 .btn-setas__two{
     position: absolute;
-    width: 100px;
-    left: 69%;
+    width: 55px;
+    left: 68.7%;
     top: 42%;
+    cursor: pointer;
+    
+    
+}
+
+
+
+.img .heart-icon{
+   
+    position: relative;
+    width: 30px;
+    left: 2%;
+    top: 0%;
+   
+    
+    
+    
 }
 
 .heart-icon{
-   
-    position: fixed;
-    width: 200px;
-    left: 79%;
-    top: 40%;
-    z-index: 10;
-    display: none;
-    
-    
+    display: block;
 }
+
+.none {
+    display: none;
+}
+
+
+.heart-icon img{
+    width: 30px;
+    position: absolute;
+    bottom: 170px;
+    left: 220px;
+  
+}
+
+.modal-heart-icon{
+    width: 300px;
+    position: absolute;
+    bottom: 300px;
+    left: 640px;
+    animation: 2s like-heart-animation ease-in-out;
+}
+
+.modal-heart-icon img{
+    width: 100px;
+    opacity: 0.8;
+}
+
+@keyframes like-heart-animation {
+    0%,
+    to {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+    15% {
+      opacity: 0.9;
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+    30% {
+      -webkit-transform: scale(0.95);
+      transform: scale(0.95);
+    }
+    45%,
+    80% {
+      opacity: 0.9;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
